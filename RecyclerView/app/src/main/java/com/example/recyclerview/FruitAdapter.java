@@ -1,9 +1,9 @@
 package com.example.recyclerview;
 
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,39 +11,40 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.ViewHolder> {
-    private List<Fruit> mFruitList;
-    static class ViewHolder extends RecyclerView.ViewHolder{
-        View fruitView;
-        ImageView fruitImage;
-        TextView fruitName;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            fruitView = itemView;
-            fruitImage = (ImageView) itemView.findViewById(R.id.fruit_image);
-            fruitName = (TextView) itemView.findViewById(R.id.fruit_name);
-        }
-    }
+public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.ViewHolder>{
+    List<Fruit> mFruitList = new ArrayList<>();
 
     public FruitAdapter(List<Fruit> fruitList) {
         mFruitList = fruitList;
     }
 
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        View itemView;
+        ImageView fruitImage;
+        TextView fruitName;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            this.itemView = itemView;
+            fruitImage = itemView.findViewById(R.id.fruit_image);
+            fruitName = itemView.findViewById(R.id.fruit_name);
+        }
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fruit_item, parent, false);
-        final ViewHolder holder = new ViewHolder(view);
-        holder.fruitView.setOnClickListener(new View.OnClickListener() {
+        View view;
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fruit_item, parent, false);
+        ViewHolder holder = new ViewHolder(view);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int position = holder.getAbsoluteAdapterPosition();
                 Fruit fruit = mFruitList.get(position);
-                Toast.makeText(v.getContext(), "you clicked view:\n" + fruit.getName(),
+                Toast.makeText(v.getContext(), "You clicked View:\n" + fruit.getName(),
                         Toast.LENGTH_SHORT).show();
             }
         });
@@ -52,7 +53,7 @@ public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.ViewHolder> 
             public void onClick(View v) {
                 int position = holder.getAbsoluteAdapterPosition();
                 Fruit fruit = mFruitList.get(position);
-                Toast.makeText(v.getContext(), "you clicked image:\n" + fruit.getName(),
+                Toast.makeText(v.getContext(), "You clicked Image:\n" + fruit.getName(),
                         Toast.LENGTH_SHORT).show();
             }
         });
