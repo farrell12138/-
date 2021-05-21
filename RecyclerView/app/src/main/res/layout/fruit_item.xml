@@ -9,14 +9,14 @@
         android:id="@+id/fruit_image"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/apple_pic"/>
+        android:src="@drawable/apple_pic"
+        android:layout_gravity="center_horizontal"/>
 
     <TextView
         android:id="@+id/fruit_name"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
         android:layout_gravity="left"
-        android:layout_marginTop="10dp"
-        android:text="Apple"/>
+        android:text="Apple"
+        android:layout_marginTop="10dp"/>
 </LinearLayout>
